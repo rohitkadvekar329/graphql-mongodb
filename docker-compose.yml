@@ -5,8 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
     ports:
-      - "4000:4000"  # Expose the port the app runs on
+      - "80:4000"  # Expose the port the app runs on
     environment:
       DB_URI: mongodb://mongo:27017
       DB_NAME: EXAMPLE_DB
