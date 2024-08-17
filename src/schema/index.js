@@ -8,7 +8,7 @@ const resolvers = require('./resolvers');
 
 
 const JWT_SECRET = process.env.JWT_SECRET;
-async function startApolloServer(db){
+async function startApolloServer(db) {
     const context = async ({ req }) => {
         // const user = await getUserFromToken(req.headers.authorization, db);
         return {
@@ -17,10 +17,14 @@ async function startApolloServer(db){
         }
     }
 
-    const server = new ApolloServer({ 
-        typeDefs, 
-        resolvers, 
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers,
         context,
+        cors: {
+            origin: '*', // Allow all origins (including HTTP)
+            credentials: true,
+        },
     });
 
     // The `listen` method launches a web server.
