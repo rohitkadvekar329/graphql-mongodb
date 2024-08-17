@@ -2,16 +2,18 @@ const { ApolloServer } = require('apollo-server');
 const jwt = require('jsonwebtoken');
 const { ObjectId } = require('mongodb');
 
-const { JWT_SECRET } = require('../env');
+
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
 
+
+const JWT_SECRET = process.env.JWT_SECRET;
 async function startApolloServer(db){
     const context = async ({ req }) => {
-        const user = await getUserFromToken(req.headers.authorization, db);
+        // const user = await getUserFromToken(req.headers.authorization, db);
         return {
             db,
-            user,
+            // user,
         }
     }
 

@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"  # Expose the port the app runs on
+    environment:
+      DB_URI: mongodb://mongo:27017
+      DB_NAME: EXAMPLE_DB
+      JWT_SECRET: "JWT SECRET"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"  # Expose MongoDB port
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
